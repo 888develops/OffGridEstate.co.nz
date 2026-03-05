@@ -1,0 +1,82 @@
+[
+    {
+        "id": "001",
+        "title": "Scenic Off-Grid Retreat",
+        "location": "Northland",
+        "price": 450000,
+        "landSize": 10,
+        "features": ["solar power", "rainwater harvesting", "established orchard"],
+        "type": "house",
+        "latitude": -35.4187,
+        "longitude": 173.8677,
+        "bedrooms": 3,
+        "bathrooms": 2,
+        "garages": 1,
+        "description": "A beautiful and secluded off-grid retreat nestled in the serene Northland landscape. This property boasts a modern, comfortable home powered entirely by solar energy, with an efficient rainwater harvesting system. Enjoy fresh produce from your established orchard and immerse yourself in sustainable living. Perfect for those seeking peace, privacy, and a reduced environmental footprint.",
+        "images": [
+            "https://via.placeholder.com/800x600/8bc34a/ffffff?text=Property+001+Image+1",
+            "https://via.placeholder.com/800x600/689f38/ffffff?text=Property+001+Image+2",
+            "https://via.placeholder.com/800x600/4CAF50/ffffff?text=Property+001+Image+3"
+        ]
+    },
+    {
+        "id": "002",
+        "title": "Sustainable Farmlet Opportunity",
+        "location": "Waikato",
+        "price": 620000,
+        "landSize": 25,
+        "features": ["permaculture gardens", "composting systems", "natural spring water"],
+        "type": "lifestyle",
+        "latitude": -37.7870,
+        "longitude": 175.2793,
+        "bedrooms": 4,
+        "bathrooms": 2,
+        "garages": 2,
+        "description": "Discover the joys of a thriving sustainable farmlet in the heart of Waikato. This expansive property features established permaculture gardens, advanced composting systems, and a reliable natural spring water source. Ideal for a family looking to embrace a self-sufficient lifestyle with plenty of space for agriculture and outdoor activities. The existing home offers ample living space with potential for further development.",
+        "images": [
+            "https://via.placeholder.com/800x600/8bc34a/ffffff?text=Property+002+Image+1",
+            "https://via.placeholder.com/800x600/689f38/ffffff?text=Property+002+Image+2",
+            "https://via.placeholder.com/800x600/4CAF50/ffffff?text=Property+002+Image+3"
+        ]
+    },
+    {
+        "id": "003",
+        "title": "Coastal Eco-Section",
+        "location": "Coromandel",
+        "price": 300000,
+        "landSize": 5,
+        "features": ["ocean views", "native bush", "potential for tiny home"],
+        "type": "land",
+        "latitude": -36.7587,
+        "longitude": 175.7001,
+        "bedrooms": null,
+        "bathrooms": null,
+        "garages": null,
+        "description": "A pristine coastal eco-section in Coromandel, offering breathtaking ocean views and lush native bush. This vacant land presents a unique opportunity to build your dream off-grid tiny home or eco-friendly dwelling (subject to council approval). Enjoy unparalleled tranquility and direct access to nature, with plenty of scope for sustainable development.",
+        "images": [
+            "https://via.placeholder.com/800x600/8bc34a/ffffff?text=Property+003+Image+1",
+            "https://via.placeholder.com/800x600/689f38/ffffff?text=Property+003+Image+2",
+            "https://via.placeholder.com/800x600/4CAF50/ffffff?text=Property+003+Image+3"
+        ]
+    },
+    {
+        "id": "004",
+        "title": "Mountain View Homestead",
+        "location": "Otago",
+        "price": 800000,
+        "landSize": 50,
+        "features": ["hydro power", "large gardens", "barn"],
+        "type": "house",
+        "latitude": -45.8788,
+        "longitude": 170.5019,
+        "bedrooms": 5,
+        "bathrooms": 3,
+        "garages": 2,
+        "description": "An expansive mountain view homestead in Otago, ideal for large families or those seeking a grand self-sufficient lifestyle. This property features its own hydro power system, extensive gardens, and a large barn for all your farming needs. With stunning panoramic views of the surrounding mountains, this home offers a blend of luxury and sustainable living.",
+        "images": [
+            "https://via.placeholder.com/800x600/8bc34a/ffffff?text=Property+004+Image+1",
+            "https://via.placeholder.com/800x600/689f38/ffffff?text=Property+004+Image+2",
+            "https://via.placeholder.com/800x600/4CAF50/ffffff?text=Property+004+Image+3"
+        ]
+    }
+]

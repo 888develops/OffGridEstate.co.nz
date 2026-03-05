@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Search - Off-Grid Estate NZ</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { background: #d4edda; border-color: #c3e6cb; }
+        .error { background: #f8d7da; border-color: #f5c6cb; }
+        .search-bar { display: flex; margin: 20px 0; }
+        .search-bar input { flex: 1; padding: 10px; margin-right: 10px; }
+        .search-bar button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .property-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Debug Search Functionality</h1>
+    
+    <div class="debug-section">
+        <h3>Search Test</h3>
+        <div class="search-bar">
+            <input type="text" id="hero-search-input" placeholder="Search for your dream off-grid location...">
+            <button id="hero-search-button">Find My Sanctuary</button>
+        </div>
+        <div id="search-results">Type something and click search...</div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Property Listings</h3>
+        <div id="property-grid">
+            <!-- Properties will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        console.log('Debug search page loaded');
+        
+        // Test data
+        const testProperties = [
+            {
+                id: "001",
+                title: "Scenic Off-Grid Retreat",
+                location: "Northland",
+                price: 450000,
+                landSize: 10,
+                features: ["solar power", "rainwater harvesting", "established orchard"],
+                bedrooms: 3,
+                bathrooms: 2
+            },
+            {
+                id: "002",
+                title: "Sustainable Farmlet Opportunity",
+                location: "Waikato",
+                price: 620000,
+                landSize: 25,
+                features: ["permaculture gardens", "composting systems", "natural spring water"],
+                bedrooms: 4,
+                bathrooms: 3
+            },
+            {
+                id: "003",
+                title: "Coastal Eco-Section",
+                location: "Coromandel",
+                price: 300000,
+                landSize: 5,
+                features: ["ocean views", "native bush", "potential for tiny home"],
+                bedrooms: 2,
+                bathrooms: 1
+            }
+        ];
+        
+        let allProperties = [...testProperties];
+        let filteredProperties = [...testProperties];
+        
+        // Search function
+        function searchProperties(searchTerm) {
+            console.log('Searching for:', searchTerm);
+            
+            if (!searchTerm || searchTerm.trim() === '') {
+                filteredProperties = [...allProperties];
+            } else {
+                const term = searchTerm.toLowerCase();
+                filteredProperties = allProperties.filter(property => 
+                    property.title.toLowerCase().includes(term) ||
+                    property.location.toLowerCase().includes(term) ||
+                    property.features.some(feature => feature.toLowerCase().includes(term)) ||
+                    property.id.includes(term)
+                );
+            }
+            
+            console.log(`Search for "${searchTerm}" found ${filteredProperties.length} properties`);
+            displayPropertyListings(filteredProperties);
+            updateSearchResults(searchTerm);
+        }
+        
+        // Display property listings
+        function displayPropertyListings(properties) {
+            const propertyGrid = document.getElementById('property-grid');
+            if (!propertyGrid) {
+                console.error('Property grid not found!');
+                return;
+            }
+            
+            propertyGrid.innerHTML = '';
+            
+            if (properties.length === 0) {
+                propertyGrid.innerHTML = '<p class="error">No properties found matching your search criteria.</p>';
+                return;
+            }
+            
+            properties.forEach(property => {
+                const propertyCard = document.createElement('div');
+                propertyCard.className = 'property-card';
+                propertyCard.innerHTML = `
+                    <h4>${property.title}</h4>
+                    <p><strong>Location:</strong> ${property.location}</p>
+                    <p><strong>Price:</strong> $${property.price.toLocaleString()}</p>
+                    <p><strong>Features:</strong> ${property.features.join(', ')}</p>
+                `;
+                propertyGrid.appendChild(propertyCard);
+            });
+        }
+        
+        // Update search results display
+        function updateSearchResults(searchTerm) {
+            const resultsDiv = document.getElementById('search-results');
+            if (filteredProperties.length === 0) {
+                resultsDiv.innerHTML = `<span class="error">No properties found for "${searchTerm}"</span>`;
+            } else {
+                resultsDiv.innerHTML = `<span class="success">Found ${filteredProperties.length} properties for "${searchTerm}"</span>`;
+            }
+        }
+        
+        // Set up search functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, setting up search...');
+            
+            const heroSearchInput = document.getElementById('hero-search-input');
+            const heroSearchButton = document.getElementById('hero-search-button');
+            
+            console.log('Search elements found:');
+            console.log('heroSearchInput:', heroSearchInput);
+            console.log('heroSearchButton:', heroSearchButton);
+            
+            if (heroSearchButton && heroSearchInput) {
+                heroSearchButton.addEventListener('click', () => {
+                    const searchTerm = heroSearchInput.value;
+                    console.log('Search button clicked, term:', searchTerm);
+                    searchProperties(searchTerm);
+                });
+                
+                heroSearchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const searchTerm = heroSearchInput.value;
+                        console.log('Enter pressed, term:', searchTerm);
+                        searchProperties(searchTerm);
+                    }
+                });
+                
+                console.log('Search event listeners added');
+            } else {
+                console.error('Search elements not found!');
+            }
+            
+            // Load initial properties
+            displayPropertyListings(filteredProperties);
+            console.log('Initial properties loaded');
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Off-Grid Estate NZ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <a href="index.html" class="logo">Off-Grid Estate NZ</a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#">Residential</a></li>
+                        <li><a href="#">Rural</a></li>
+                        <li><a href="#">Commercial</a></li>
+                        <li><a href="#">Business</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="secondary-nav">
+                <ul>
+                    <li><a href="#">For sellers</a></li>
+                    <li><a href="#">Agents</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Log in / Sign up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background-image: url('./assets/offgridherobanner.jpg'); background-size: cover; background-position: center;">
+        <div class="container">
+            <h2>Discover Your Off-Grid Freedom</h2>
+            <p class="hero-subtitle">Escape to sustainable living where luxury meets nature. Find your perfect eco-sanctuary today.</p>
+            <nav class="hero-nav">
+                <ul>
+                    <li><a href="#">Buy</a></li>
+                    <li><a href="#">New builds</a></li>
+                    <li><a href="#">Rent</a></li>
+                    <li><a href="#">Sold</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar hero-search">
+                <input type="text" id="hero-search-input" placeholder="Search for your dream off-grid location...">
+                <button class="filter-button" id="hero-filter-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon>
+                    </svg>
+                    Advanced Filters
+                </button>
+                <button id="hero-search-button">Find My Sanctuary</button>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <span>Explore Properties</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map Search -->
+    <section class="map-search-section">
+        <div class="container">
+            <div class="map-search-header">
+                <h2>Explore Your Off-Grid Paradise</h2>
+                <p class="section-subtitle">Navigate New Zealand's most pristine locations for sustainable living. Discover hidden gems where nature meets luxury.</p>
+            </div>
+            <div class="map-search-container">
+                <div class="map-search-controls">
+                    <div class="search-filters">
+                        <button class="filter-chip active" data-filter="all">All Regions</button>
+                        <button class="filter-chip" data-filter="northland">Northland</button>
+                        <button class="filter-chip" data-filter="coromandel">Coromandel</button>
+                        <button class="filter-chip" data-filter="bay-of-plenty">Bay of Plenty</button>
+                        <button class="filter-chip" data-filter="waikato">Waikato</button>
+                        <button class="filter-chip" data-filter="otago">Otago</button>
+                    </div>
+                    <div class="map-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">247</span>
+                            <span class="stat-label">Eco Properties</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">89</span>
+                            <span class="stat-label">Off-Grid Ready</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">156</span>
+                            <span class="stat-label">Solar Powered</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="interactive-map" id="interactive-map">
+                    <!-- Map will be initialized here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties Carousel -->
+    <section class="featured-properties">
+        <div class="container">
+            <h2>Luxury Eco-Sanctuaries</h2>
+            <p class="section-subtitle">Discover handpicked off-grid properties where sustainable living meets unparalleled luxury and freedom.</p>
+            <div class="carousel-container">
+                <button class="carousel-arrow carousel-prev" id="carousel-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                <div class="carousel-wrapper" id="carousel-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Featured property cards will be loaded here by JavaScript -->
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-next" id="carousel-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Listings Section -->
+    <section class="property-listings-section">
+        <div class="container">
+            <div class="listings-header">
+                <h2>Premium Off-Grid Properties</h2>
+                <p class="section-subtitle">Handpicked sustainable living opportunities across New Zealand's most pristine locations.</p>
+            </div>
+            
+            <div class="property-grid" id="property-grid">
+                <!-- Property cards will be loaded here by JavaScript -->
+            </div>
+            
+            <div class="listings-footer">
+                <button class="load-more-btn">
+                    <span>Load More Properties</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Account Section -->
+    <section class="user-account-section">
+        <div class="container">
+            <div class="account-grid">
+                <div class="account-card">
+                    <div class="account-card-header">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <h3>My Property</h3>
+                    </div>
+                    <ul class="account-links">
+                        <li><a href="#" class="account-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7z"></path>
+                            </svg>
+                            Saved Properties
+                        </a></li>
+                        <li><a href="#" class="account-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                            Saved Searches & Alerts
+                        </a></li>
+                        <li><a href="#" class="account-link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path>
+                            </svg>
+                            Account Settings
+                        </a></li>
+                    </ul>
+                </div>
+
+                <div class="account-card">
+                    <div class="account-card-header">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <h3>Explore Locations</h3>
+                    </div>
+                    <div class="location-grid">
+                        <a href="#" class="location-link" data-region="northland">
+                            <span class="location-name">Northland</span>
+                            <span class="property-count">45 Properties</span>
+                        </a>
+                        <a href="#" class="location-link" data-region="auckland">
+                            <span class="location-name">Auckland</span>
+                            <span class="property-count">32 Properties</span>
+                        </a>
+                        <a href="#" class="location-link" data-region="waikato">
+                            <span class="location-name">Waikato</span>
+                            <span class="property-count">52 Properties</span>
+                        </a>
+                        <a href="#" class="location-link" data-region="bay-of-plenty">
+                            <span class="location-name">Bay of Plenty</span>
+                            <span class="property-count">38 Properties</span>
+                        </a>
+                        <a href="#" class="location-link" data-region="coromandel">
+                            <span class="location-name">Coromandel</span>
+                            <span class="property-count">28 Properties</span>
+                        </a>
+                        <a href="#" class="location-link" data-region="otago">
+                            <span class="location-name">Otago</span>
+                            <span class="property-count">67 Properties</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section id="map"></section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#">Buy residential property</a></li>
+                    <li><a href="#">Rent residential property</a></li>
+                    <li><a href="#">Buy lifestyle property</a></li>
+                    <li><a href="#">Sell residential property</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Off-Grid Estate NZ</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Advertise with us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Stay safe online</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Download our app</h3>
+                <p>App Store | Google Play</p>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2023 Off-Grid Estate NZ</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script-working.js"></script>
+
+    <!-- Filter Pop-up (Modal) Structure -->
+    <div id="filter-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <aside class="filters-popup">
+                <h2>Advanced Filters</h2>
+                <form>
+                    <div class="filter-group">
+                        <label for="modal-location">Location:</label>
+                        <div class="input-with-clear">
+                            <input type="text" id="modal-location" placeholder="e.g., Northland, Waikato">
+                            <button type="button" class="clear-input" data-target="modal-location">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-property-type">Property Type:</label>
+                        <div class="select-with-clear">
+                            <select id="modal-property-type">
+                                <option value="">Any</option>
+                                <option value="land">Land</option>
+                                <option value="house">House</option>
+                                <option value="lifestyle">Lifestyle Block</option>
+                                <option value="business">Business</option>
+                            </select>
+                            <button type="button" class="clear-select" data-target="modal-property-type">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Price Range:</label>
+                        <div class="range-inputs">
+                            <input type="text" id="modal-min-price" placeholder="Min price">
+                            <span>to</span>
+                            <input type="text" id="modal-max-price" placeholder="Max price">
+                            <button type="button" class="clear-range" data-min="modal-min-price" data-max="modal-max-price">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Bedrooms:</label>
+                        <div class="range-inputs">
+                            <input type="number" id="modal-min-bedrooms" min="0" placeholder="Min rooms">
+                            <span>to</span>
+                            <input type="number" id="modal-max-bedrooms" min="0" placeholder="Max rooms">
+                            <button type="button" class="clear-range" data-min="modal-min-bedrooms" data-max="modal-max-bedrooms">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Bathrooms:</label>
+                        <div class="range-inputs">
+                            <input type="number" id="modal-min-bathrooms" min="0" placeholder="Min bathrooms">
+                            <span>to</span>
+                            <input type="number" id="modal-max-bathrooms" min="0" placeholder="Max bathrooms">
+                            <button type="button" class="clear-range" data-min="modal-min-bathrooms" data-max="modal-max-bathrooms">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Garages:</label>
+                        <div class="range-inputs">
+                            <input type="number" id="modal-min-garages" min="0" placeholder="Min garages">
+                            <span>to</span>
+                            <input type="number" id="modal-max-garages" min="0" placeholder="Max garages">
+                            <button type="button" class="clear-range" data-min="modal-min-garages" data-max="modal-max-garages">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Land Area (acres):</label>
+                        <div class="range-inputs">
+                            <input type="number" id="modal-min-land-area" min="0" placeholder="Min area">
+                            <span>to</span>
+                            <input type="number" id="modal-max-land-area" min="0" placeholder="Max area">
+                            <button type="button" class="clear-range" data-min="modal-min-land-area" data-max="modal-max-land-area">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Floor Area (sqm):</label>
+                        <div class="range-inputs">
+                            <input type="number" id="modal-min-floor-area" min="0" placeholder="Min area">
+                            <span>to</span>
+                            <input type="number" id="modal-max-floor-area" min="0" placeholder="Max area">
+                            <button type="button" class="clear-range" data-min="modal-min-floor-area" data-max="modal-max-floor-area">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-water-source">Water Source:</label>
+                        <div class="select-with-clear">
+                            <select id="modal-water-source">
+                                <option value="">Any</option>
+                                <option value="rainwater-harvesting">Rainwater Harvesting</option>
+                                <option value="bore">Bore</option>
+                                <option value="spring">Natural Spring</option>
+                                <option value="community-scheme">Community Scheme</option>
+                                <option value="mains">Mains Water</option>
+                            </select>
+                            <button type="button" class="clear-select" data-target="modal-water-source">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-power-source">Power Source:</label>
+                        <div class="select-with-clear">
+                            <select id="modal-power-source">
+                                <option value="">Any</option>
+                                <option value="solar">Solar Power</option>
+                                <option value="wind">Wind Turbine</option>
+                                <option value="hydro">Hydro Power</option>
+                                <option value="grid-tied">Grid-Tied Solar</option>
+                                <option value="generator">Generator</option>
+                                <option value="mains">Mains Power</option>
+                            </select>
+                            <button type="button" class="clear-select" data-target="modal-power-source">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-waste-management">Waste Management:</label>
+                        <div class="select-with-clear">
+                            <select id="modal-waste-management">
+                                <option value="">Any</option>
+                                <option value="composting-toilet">Composting Toilet</option>
+                                <option value="septic-tank">Septic Tank</option>
+                                <option value="greywater-system">Greywater System</option>
+                                <option value="council-collection">Council Collection</option>
+                            </select>
+                            <button type="button" class="clear-select" data-target="modal-waste-management">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-sustainable-materials">Sustainable Building Materials:</label>
+                        <div class="select-with-clear">
+                            <select id="modal-sustainable-materials">
+                                <option value="">Any</option>
+                                <option value="timber">Reclaimed Timber</option>
+                                <option value="earth">Earth Building (Rammed Earth, Adobe)</option>
+                                <option value="straw-bale">Straw Bale</option>
+                                <option value="bamboo">Bamboo</option>
+                            </select>
+                            <button type="button" class="clear-select" data-target="modal-sustainable-materials">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-certification">Certification:</label>
+                        <div class="select-with-clear">
+                            <select id="modal-certification">
+                                <option value="">Any</option>
+                                <option value="organic">Organic Certified</option>
+                                <option value="permaculture">Permaculture Designed</option>
+                                <option value="eco-friendly">Eco-Friendly Certified</option>
+                            </select>
+                            <button type="button" class="clear-select" data-target="modal-certification">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label>Features:</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="feature-new-build">
+                            <label for="feature-new-build">New build</label>
+                            <input type="checkbox" id="feature-swimming-pool">
+                            <label for="feature-swimming-pool">Swimming pool</label>
+                            <input type="checkbox" id="feature-coastal-waterfront">
+                            <label for="feature-coastal-waterfront">Coastal waterfront</label>
+                            <input type="checkbox" id="feature-floor-plans">
+                            <label for="feature-floor-plans">Floor plans</label>
+                            <input type="checkbox" id="feature-videos">
+                            <label for="feature-videos">Videos</label>
+                            <input type="checkbox" id="feature-virtual-walkthroughs">
+                            <label for="feature-virtual-walkthroughs">Virtual walkthroughs</label>
+                        </div>
+                        <button type="button" class="clear-checkbox-group">Clear</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-keyword-search">Keyword search:</label>
+                        <div class="input-with-clear">
+                            <input type="text" id="modal-keyword-search" placeholder="e.g., &quot;bricks & tiles&quot;, pool, beach">
+                            <button type="button" class="clear-input" data-target="modal-keyword-search">Clear</button>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <label for="modal-listing-status">Listing status:</label>
+                        <div class="select-with-clear">
+                            <select id="modal-listing-status">
+                                <option value="">Any</option>
+                                <option value="open-home">Open home</option>
+                                <option value="mortgagee-sale">Mortgagee sale</option>
+                                <option value="address-displayed">Address displayed</option>
+                            </select>
+                            <button type="button" class="clear-select" data-target="modal-listing-status">Clear</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="modal-apply-filters">Search</button>
+                </form>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>

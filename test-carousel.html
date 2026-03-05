@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Carousel - Off-Grid Estate NZ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .test-info {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            border-left: 4px solid #2196f3;
+        }
+        .console-output {
+            background: #f5f5f5;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-info">
+        <h2>Carousel Test Page</h2>
+        <p>This page tests the carousel functionality with console logging.</p>
+        <div id="console-output" class="console-output">Loading...</div>
+    </div>
+
+    <!-- Featured Properties Carousel -->
+    <section class="featured-properties">
+        <div class="container">
+            <h2>Luxury Eco-Sanctuaries</h2>
+            <p class="section-subtitle">Discover handpicked off-grid properties where sustainable living meets unparalleled luxury and freedom.</p>
+            <div class="carousel-container">
+                <button class="carousel-arrow carousel-prev" id="carousel-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                <div class="carousel-wrapper" id="carousel-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Featured property cards will be loaded here by JavaScript -->
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-next" id="carousel-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Override console.log to capture output
+        const originalLog = console.log;
+        const originalError = console.error;
+        const consoleOutput = document.getElementById('console-output');
+        let logMessages = [];
+
+        function addLogMessage(type, message) {
+            const timestamp = new Date().toLocaleTimeString();
+            logMessages.push(`[${timestamp}] ${type}: ${message}`);
+            consoleOutput.textContent = logMessages.join('\n');
+        }
+
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addLogMessage('LOG', args.join(' '));
+        };
+
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addLogMessage('ERROR', args.join(' '));
+        };
+
+        // Test data
+        const testProperties = [
+            {
+                id: "001",
+                title: "Scenic Off-Grid Retreat",
+                location: "Northland",
+                price: 450000,
+                landSize: 10,
+                features: ["solar power", "rainwater harvesting", "established orchard"],
+                bedrooms: 3,
+                bathrooms: 2,
+                images: ["https://via.placeholder.com/380x280/2d5016/ffffff?text=Luxury+Eco+Property+1"]
+            },
+            {
+                id: "002",
+                title: "Sustainable Farmlet Opportunity",
+                location: "Waikato",
+                price: 620000,
+                landSize: 25,
+                features: ["permaculture gardens", "composting systems", "natural spring water"],
+                bedrooms: 4,
+                bathrooms: 3,
+                images: ["https://via.placeholder.com/380x280/4a7c59/ffffff?text=Luxury+Eco+Property+2"]
+            },
+            {
+                id: "003",
+                title: "Coastal Eco-Section",
+                location: "Coromandel",
+                price: 300000,
+                landSize: 5,
+                features: ["ocean views", "native bush", "potential for tiny home"],
+                bedrooms: 2,
+                bathrooms: 1,
+                images: ["https://via.placeholder.com/380x280/6b8e23/ffffff?text=Luxury+Eco+Property+3"]
+            }
+        ];
+
+        // Carousel functionality
+        let currentSlide = 0;
+        let carouselTrack, carouselWrapper, carouselPrev, carouselNext;
+        const cardWidth = 340;
+        let visibleCards = 3;
+
+        function initializeCarouselElements() {
+            carouselTrack = document.getElementById('carousel-track');
+            carouselWrapper = document.getElementById('carousel-wrapper');
+            carouselPrev = document.getElementById('carousel-prev');
+            carouselNext = document.getElementById('carousel-next');
+
+            console.log('Carousel elements found:');
+            console.log('carouselTrack:', carouselTrack);
+            console.log('carouselWrapper:', carouselWrapper);
+            console.log('carouselPrev:', carouselPrev);
+            console.log('carouselNext:', carouselNext);
+        }
+
+        function createFeaturedPropertyCard(property) {
+            const offGridRating = Math.floor(Math.random() * 3) + 3;
+            const stars = '★'.repeat(offGridRating) + '☆'.repeat(5 - offGridRating);
+            
+            return `
+                <div class="featured-property-card" data-id="${property.id}">
+                    <img src="${property.images?.[0] || 'https://via.placeholder.com/380x280/2d5016/ffffff?text=Luxury+Eco+Property'}" 
+                         alt="${property.title}" 
+                         class="featured-property-image">
+                    <div class="featured-property-content">
+                        <h3 class="featured-property-title">${property.title}</h3>
+                        <div class="featured-property-location">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            ${property.location}
+                        </div>
+                        <div class="off-grid-rating">
+                            <div class="rating-stars">${stars}</div>
+                            <span class="rating-text">Off-Grid ${offGridRating}/5</span>
+                        </div>
+                        <div class="featured-property-price">$${property.price.toLocaleString()}</div>
+                        <div class="featured-property-details">
+                            <div class="featured-property-detail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                </svg>
+                                ${property.bedrooms || 0} bed
+                            </div>
+                            <div class="featured-property-detail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2-2z"></path>
+                                </svg>
+                                ${property.bathrooms || 0} bath
+                            </div>
+                            <div class="featured-property-detail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                </svg>
+                                ${property.landSize} acres
+                            </div>
+                            <div class="featured-property-detail">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                </svg>
+                                Eco-Luxury
+                            </div>
+                        </div>
+                        <div class="featured-property-features">
+                            ${property.features.slice(0, 3).map(feature => 
+                                `<span class="featured-property-feature">${feature}</span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayFeaturedProperties(properties) {
+            console.log('Displaying featured properties:', properties);
+            console.log('Carousel track element:', carouselTrack);
+            
+            if (!carouselTrack) {
+                console.error('Carousel track element not found!');
+                return;
+            }
+            
+            carouselTrack.innerHTML = '';
+            
+            properties.forEach(property => {
+                const propertyCard = createFeaturedPropertyCard(property);
+                carouselTrack.innerHTML += propertyCard;
+            });
+
+            console.log('Featured properties displayed. Number of cards:', carouselTrack.children.length);
+        }
+
+        function updateCarousel() {
+            if (!carouselTrack) return;
+            const maxSlide = Math.max(0, carouselTrack.children.length - visibleCards);
+            currentSlide = Math.min(currentSlide, maxSlide);
+            currentSlide = Math.max(0, currentSlide);
+            
+            const translateX = -currentSlide * cardWidth;
+            carouselTrack.style.transform = `translateX(${translateX}px)`;
+            
+            console.log(`Carousel updated: slide ${currentSlide}, translateX: ${translateX}px`);
+        }
+
+        function setupCarouselNavigation() {
+            if (carouselPrev) {
+                carouselPrev.addEventListener('click', () => {
+                    if (currentSlide > 0) {
+                        currentSlide--;
+                        updateCarousel();
+                    }
+                });
+            }
+
+            if (carouselNext) {
+                carouselNext.addEventListener('click', () => {
+                    const maxSlide = Math.max(0, carouselTrack.children.length - visibleCards);
+                    if (currentSlide < maxSlide) {
+                        currentSlide++;
+                        updateCarousel();
+                    }
+                });
+            }
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing carousel...');
+            
+            initializeCarouselElements();
+            setupCarouselNavigation();
+            displayFeaturedProperties(testProperties);
+            updateCarousel();
+            
+            console.log('Carousel initialization complete!');
+        });
+    </script>
+</body>
+</html>
+

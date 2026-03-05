@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Off-Grid Estate NZ - Test Version</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <a href="index.html" class="logo">Off-Grid Estate NZ</a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#">Residential</a></li>
+                        <li><a href="#">Rural</a></li>
+                        <li><a href="#">Commercial</a></li>
+                        <li><a href="#">Business</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="secondary-nav">
+                <ul>
+                    <li><a href="#">For sellers</a></li>
+                    <li><a href="#">Agents</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Log in / Sign up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background-image: url('./assets/offgridherobanner.jpg'); background-size: cover; background-position: center;">
+        <div class="container">
+            <h2>Discover Your Off-Grid Freedom</h2>
+            <p class="hero-subtitle">Escape to sustainable living where luxury meets nature. Find your perfect eco-sanctuary today.</p>
+            <nav class="hero-nav">
+                <ul>
+                    <li><a href="#">Buy</a></li>
+                    <li><a href="#">New builds</a></li>
+                    <li><a href="#">Rent</a></li>
+                    <li><a href="#">Sold</a></li>
+                </ul>
+            </nav>
+            <div class="search-bar hero-search">
+                <input type="text" id="hero-search-input" placeholder="Search for your dream off-grid location...">
+                <button class="filter-button" id="hero-filter-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"></polygon>
+                    </svg>
+                    Advanced Filters
+                </button>
+                <button id="hero-search-button">Find My Sanctuary</button>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </div>
+                <span>Explore Properties</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties Carousel -->
+    <section class="featured-properties">
+        <div class="container">
+            <h2>Luxury Eco-Sanctuaries</h2>
+            <p class="section-subtitle">Discover handpicked off-grid properties where sustainable living meets unparalleled luxury and freedom.</p>
+            <div class="carousel-container">
+                <button class="carousel-arrow carousel-prev" id="carousel-prev">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15,18 9,12 15,6"></polyline>
+                    </svg>
+                </button>
+                <div class="carousel-wrapper" id="carousel-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Featured property cards will be loaded here by JavaScript -->
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-next" id="carousel-next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9,18 15,12 9,6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Property Listings Section -->
+    <section class="property-listings-section">
+        <div class="container">
+            <div class="listings-header">
+                <h2>Premium Off-Grid Properties</h2>
+                <p class="section-subtitle">Handpicked sustainable living opportunities across New Zealand's most pristine locations.</p>
+                <div class="listings-search-bar">
+                    <input type="text" placeholder="Search by keyword, region, or property ID...">
+                    <button class="search-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+            </div>
+            
+            <div class="property-grid" id="property-grid">
+                <!-- Property cards will be loaded here by JavaScript -->
+            </div>
+            
+            <div class="listings-footer">
+                <button class="load-more-btn">
+                    <span>Load More Properties</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6,9 12,15 18,9"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="#">Buy residential property</a></li>
+                    <li><a href="#">Rent residential property</a></li>
+                    <li><a href="#">Buy lifestyle property</a></li>
+                    <li><a href="#">Sell residential property</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Off-Grid Estate NZ</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Advertise with us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Stay safe online</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Download our app</h3>
+                <p>App Store | Google Play</p>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2023 Off-Grid Estate NZ</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script-simple.js"></script>
+</body>
+</html>
+

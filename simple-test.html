@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test - Off-Grid Estate NZ</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { background: #d4edda; border-color: #c3e6cb; }
+        .error { background: #f8d7da; border-color: #f5c6cb; }
+    </style>
+</head>
+<body>
+    <h1>Simple JavaScript Test</h1>
+    
+    <div class="test-section">
+        <h3>Test 1: Basic JavaScript</h3>
+        <div id="test1">Loading...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 2: API Connection</h3>
+        <div id="test2">Loading...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 3: Carousel Elements</h3>
+        <div id="test3">Loading...</div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Test 4: Property Cards</h3>
+        <div id="test4">Loading...</div>
+    </div>
+
+    <!-- Featured Properties Carousel -->
+    <section class="featured-properties">
+        <div class="container">
+            <h2>Luxury Eco-Sanctuaries</h2>
+            <p class="section-subtitle">Discover handpicked off-grid properties where sustainable living meets unparalleled luxury and freedom.</p>
+            <div class="carousel-container">
+                <button class="carousel-arrow carousel-prev" id="carousel-prev">←</button>
+                <div class="carousel-wrapper" id="carousel-wrapper">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Property cards will be loaded here -->
+                    </div>
+                </div>
+                <button class="carousel-arrow carousel-next" id="carousel-next">→</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Test 1: Basic JavaScript
+        document.getElementById('test1').innerHTML = '<span class="success">✓ JavaScript is working!</span>';
+        
+        // Test 2: API Connection
+        async function testAPI() {
+            try {
+                const response = await fetch('/api/properties');
+                const data = await response.json();
+                document.getElementById('test2').innerHTML = 
+                    `<span class="success">✓ API working! Found ${data.length} properties</span>`;
+                return data;
+            } catch (error) {
+                document.getElementById('test2').innerHTML = 
+                    `<span class="error">✗ API Error: ${error.message}</span>`;
+                return null;
+            }
+        }
+        
+        // Test 3: Carousel Elements
+        function testCarouselElements() {
+            const carouselTrack = document.getElementById('carousel-track');
+            const carouselWrapper = document.getElementById('carousel-wrapper');
+            const carouselPrev = document.getElementById('carousel-prev');
+            const carouselNext = document.getElementById('carousel-next');
+            
+            let html = '<ul>';
+            html += `<li>carousel-track: ${carouselTrack ? '✓ Found' : '✗ Not found'}</li>`;
+            html += `<li>carousel-wrapper: ${carouselWrapper ? '✓ Found' : '✗ Not found'}</li>`;
+            html += `<li>carousel-prev: ${carouselPrev ? '✓ Found' : '✗ Not found'}</li>`;
+            html += `<li>carousel-next: ${carouselNext ? '✓ Found' : '✗ Not found'}</li>`;
+            html += '</ul>';
+            
+            document.getElementById('test3').innerHTML = html;
+            
+            return { carouselTrack, carouselWrapper, carouselPrev, carouselNext };
+        }
+        
+        // Test 4: Create and display property cards
+        function testPropertyCards(properties) {
+            const carouselTrack = document.getElementById('carousel-track');
+            if (!carouselTrack) {
+                document.getElementById('test4').innerHTML = 
+                    '<span class="error">✗ Carousel track not found</span>';
+                return;
+            }
+            
+            if (!properties || properties.length === 0) {
+                document.getElementById('test4').innerHTML = 
+                    '<span class="error">✗ No properties to display</span>';
+                return;
+            }
+            
+            carouselTrack.innerHTML = '';
+            properties.forEach(property => {
+                const card = document.createElement('div');
+                card.style.cssText = 'border: 1px solid #ccc; padding: 10px; margin: 5px; border-radius: 5px; background: white;';
+                card.innerHTML = `
+                    <h4>${property.title}</h4>
+                    <p>Location: ${property.location}</p>
+                    <p>Price: $${property.price.toLocaleString()}</p>
+                    <p>Features: ${property.features.join(', ')}</p>
+                `;
+                carouselTrack.appendChild(card);
+            });
+            
+            document.getElementById('test4').innerHTML = 
+                `<span class="success">✓ Created ${properties.length} property cards</span>`;
+        }
+        
+        // Run all tests
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('Running tests...');
+            
+            // Test carousel elements
+            const elements = testCarouselElements();
+            
+            // Test API and create property cards
+            const properties = await testAPI();
+            if (properties) {
+                testPropertyCards(properties);
+            }
+            
+            console.log('Tests completed!');
+        });
+    </script>
+</body>
+</html>
+
