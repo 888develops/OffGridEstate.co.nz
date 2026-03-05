@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let allProperties = [...testProperties];
     let filteredProperties = [...testProperties];
+    let visibleCount = 3;
     
     // Search function
     function searchProperties(searchTerm) {
@@ -95,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('🎯 Filtered properties:', filteredProperties.length);
         }
         
+        visibleCount = 3;
         displayPropertyListings(filteredProperties);
     }
     
@@ -114,7 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        properties.forEach(property => {
+        const toShow = properties.slice(0, visibleCount);
+        toShow.forEach(property => {
             const propertyCard = createPropertyCard(property);
             propertyGrid.appendChild(propertyCard);
         });
@@ -251,6 +254,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const searchTerm = heroSearchInput.value;
                 console.log('🔍 Search button clicked! Term:', searchTerm);
                 searchProperties(searchTerm);
+                const listingsSection = document.getElementById('property-listings-section');
+                if (listingsSection) {
+                    listingsSection.scrollIntoView({ behavior: 'smooth' });
+                }
             });
             
             heroSearchInput.addEventListener('keypress', (e) => {
@@ -258,12 +265,65 @@ document.addEventListener('DOMContentLoaded', () => {
                     const searchTerm = heroSearchInput.value;
                     console.log('⌨️ Enter pressed! Term:', searchTerm);
                     searchProperties(searchTerm);
+                    const listingsSection = document.getElementById('property-listings-section');
+                    if (listingsSection) {
+                        listingsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
             });
             
             console.log('✅ Search event listeners added successfully!');
         } else {
             console.error('❌ Search elements not found!');
+        }
+
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+            scrollIndicator.addEventListener('click', () => {
+                const listingsSection = document.getElementById('property-listings-section');
+                if (listingsSection) {
+                    listingsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        const locationLinks = document.querySelectorAll('.location-link');
+        locationLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const region = link.dataset.region || '';
+                if (region) {
+                    console.log('📍 Filtering by region from location-link:', region);
+                    searchProperties(region.replace(/-/g, ' '));
+                    const listingsSection = document.getElementById('property-listings-section');
+                    if (listingsSection) {
+                        listingsSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlRegion = urlParams.get('region');
+        const urlQuery = urlParams.get('q');
+        if (urlRegion || urlQuery) {
+            const combinedTerm = [urlRegion, urlQuery].filter(Boolean).join(' ');
+            searchProperties(combinedTerm);
+        }
+
+        const loadMoreBtn = document.querySelector('.load-more-btn');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                if (visibleCount < filteredProperties.length) {
+                    visibleCount += 3;
+                    displayPropertyListings(filteredProperties);
+                    if (visibleCount >= filteredProperties.length) {
+                        loadMoreBtn.innerHTML = '<span>End of mock listings</span>';
+                    }
+                } else {
+                    loadMoreBtn.innerHTML = '<span>End of mock listings</span>';
+                }
+            });
         }
     }
     

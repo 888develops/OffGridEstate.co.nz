@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in / Sign up - Off-Grid Estate NZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <a href="index.html" class="logo">Off-Grid Estate NZ</a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html#property-listings-section">Residential</a></li>
+                        <li><a href="index.html#property-listings-section">Rural</a></li>
+                        <li><a href="index.html#property-listings-section">Commercial</a></li>
+                        <li><a href="index.html#property-listings-section">Business</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="secondary-nav">
+                <ul>
+                    <li><a href="sellers.html">For sellers</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="login.html">Log in / Sign up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="property-details-main">
+        <section class="property-header">
+            <div class="container">
+                <div class="property-title-section">
+                    <h1>Log in / Sign up</h1>
+                    <p class="property-subtitle">Create a demo account so you can experience saved properties and account pages.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-form-container">
+                    <h3 id="auth-heading">Welcome back</h3>
+                    <form class="contact-form" id="auth-form">
+                        <div class="form-group">
+                            <label for="auth-name">Full name</label>
+                            <input type="text" id="auth-name" placeholder="e.g. Alex Taylor">
+                        </div>
+                        <div class="form-group">
+                            <label for="auth-email">Email (required)</label>
+                            <input type="email" id="auth-email" required placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="auth-password">Password (demo only)</label>
+                            <input type="password" id="auth-password" required minlength="6" placeholder="Choose a password you don't use elsewhere">
+                        </div>
+                        <p style="font-size:0.85em;color:#4b5563;margin-top:0;margin-bottom:16px;">
+                            This is a demonstration only. Please use a throwaway password, as this login is stored in your browser using localStorage.
+                        </p>
+                        <button type="submit" class="btn-primary" id="auth-submit-btn">Continue</button>
+                        <button type="button" class="btn-secondary" id="auth-logout-btn" style="margin-top:12px;display:none;">Log out</button>
+                        <p id="auth-feedback" style="margin-top:16px;color:#4b5563;font-size:0.9em;display:none;"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="index.html#property-listings-section">Buy residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Rent residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Buy lifestyle property</a></li>
+                    <li><a href="index.html#property-listings-section">Sell residential property</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Off-Grid Estate NZ</h3>
+                <ul>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="advertise.html">Advertise with us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact us</a></li>
+                    <li><a href="safety.html">Stay safe online</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Download our app</h3>
+                <p>Mobile app experience coming soon.</p>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2023 Off-Grid Estate NZ &mdash; Demo experience only</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('auth-form');
+        const nameInput = document.getElementById('auth-name');
+        const emailInput = document.getElementById('auth-email');
+        const passwordInput = document.getElementById('auth-password');
+        const feedback = document.getElementById('auth-feedback');
+        const heading = document.getElementById('auth-heading');
+        const logoutBtn = document.getElementById('auth-logout-btn');
+
+        function getRedirectTarget() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('redirect') || 'index.html';
+        }
+
+        function getCurrentUser() {
+            try {
+                const raw = localStorage.getItem('ogUser');
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function setCurrentUser(user) {
+            localStorage.setItem('ogUser', JSON.stringify(user));
+            localStorage.setItem('ogIsLoggedIn', 'true');
+        }
+
+        function clearCurrentUser() {
+            localStorage.removeItem('ogUser');
+            localStorage.removeItem('ogIsLoggedIn');
+        }
+
+        const existingUser = getCurrentUser();
+        if (existingUser) {
+            heading.textContent = 'You are logged in';
+            feedback.style.display = 'block';
+            feedback.textContent = 'Signed in as ' + (existingUser.name || existingUser.email) + '. You can safely close this page or visit your account.';
+            logoutBtn.style.display = 'inline-block';
+        }
+
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const email = emailInput.value.trim();
+                const password = passwordInput.value;
+                let name = nameInput.value.trim();
+
+                if (!email || !password) {
+                    feedback.style.display = 'block';
+                    feedback.textContent = 'Please provide an email and password to continue.';
+                    return;
+                }
+
+                if (!name) {
+                    name = email.split('@')[0];
+                }
+
+                const user = { name, email };
+                setCurrentUser(user);
+
+                feedback.style.display = 'block';
+                feedback.textContent = 'Welcome, ' + name + '. Redirecting you back to the site...';
+
+                setTimeout(function () {
+                    window.location.href = getRedirectTarget();
+                }, 900);
+            });
+        }
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function () {
+                clearCurrentUser();
+                feedback.style.display = 'block';
+                feedback.textContent = 'You have been logged out of this demo. You can log in again at any time.';
+                heading.textContent = 'Log in / Sign up';
+                logoutBtn.style.display = 'none';
+            });
+        }
+    });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Off-Grid Estate NZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <a href="index.html" class="logo">Off-Grid Estate NZ</a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html#property-listings-section">Residential</a></li>
+                        <li><a href="index.html#property-listings-section">Rural</a></li>
+                        <li><a href="index.html#property-listings-section">Commercial</a></li>
+                        <li><a href="index.html#property-listings-section">Business</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="secondary-nav">
+                <ul>
+                    <li><a href="sellers.html">For sellers</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="login.html">Log in / Sign up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="property-details-main">
+        <section class="property-header">
+            <div class="container">
+                <div class="property-title-section">
+                    <h1>My Account</h1>
+                    <p class="property-subtitle" id="account-subtitle">
+                        Review your demo profile, saved properties and &quot;request to buy&quot; submissions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="property-details-section">
+            <div class="container">
+                <div class="property-details-grid">
+                    <div class="property-info">
+                        <div class="property-description" id="account-profile">
+                            <!-- Profile info will be injected here -->
+                        </div>
+
+                        <div class="property-description">
+                            <h2>Your recent &quot;request to buy&quot; submissions</h2>
+                            <div id="account-requests">
+                                <!-- Requests will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="property-sidebar">
+                        <div class="property-features-card">
+                            <h4>Quick links</h4>
+                            <div class="features-list">
+                                <div class="feature-item">
+                                    <a href="saved-properties.html" style="text-decoration:none;color:inherit;">View saved properties</a>
+                                </div>
+                                <div class="feature-item">
+                                    <a href="saved-searches.html" style="text-decoration:none;color:inherit;">Manage saved searches</a>
+                                </div>
+                                <div class="feature-item">
+                                    <a href="login.html" style="text-decoration:none;color:inherit;">Update login details (demo)</a>
+                                </div>
+                            </div>
+                            <div style="margin-top:16px;">
+                                <button class="btn-secondary" id="account-logout-btn">Log out of demo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="index.html#property-listings-section">Buy residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Rent residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Buy lifestyle property</a></li>
+                    <li><a href="index.html#property-listings-section">Sell residential property</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Off-Grid Estate NZ</h3>
+                <ul>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="advertise.html">Advertise with us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact us</a></li>
+                    <li><a href="safety.html">Stay safe online</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Download our app</h3>
+                <p>Mobile app experience coming soon.</p>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2023 Off-Grid Estate NZ &mdash; Demo experience only</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const profileContainer = document.getElementById('account-profile');
+        const requestsContainer = document.getElementById('account-requests');
+        const logoutBtn = document.getElementById('account-logout-btn');
+        const subtitle = document.getElementById('account-subtitle');
+
+        function getUser() {
+            try {
+                const raw = localStorage.getItem('ogUser');
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function getRequests() {
+            try {
+                const raw = localStorage.getItem('ogPurchaseRequests');
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function renderProfile() {
+            const user = getUser();
+            if (!user) {
+                profileContainer.innerHTML = '<p>You are not logged in yet. This account area is part of the demo experience only. <a href="login.html?redirect=account.html">Log in or create a demo profile</a> to see how it would feel.</p>';
+                if (subtitle) {
+                    subtitle.textContent = 'You are viewing the account area as a guest. Log in to see how a demo profile would appear.';
+                }
+                return;
+            }
+
+            profileContainer.innerHTML = '\
+                <h2>Profile details</h2>\
+                <p><strong>Name:</strong> ' + (user.name || '') + '</p>\
+                <p><strong>Email:</strong> ' + (user.email || '') + '</p>\
+                <p style="font-size:0.9em;color:#4b5563;">This profile exists only in your browser for the purposes of the demo. No real user account has been created.</p>';
+        }
+
+        function renderRequests() {
+            const requests = getRequests();
+            if (!requests.length) {
+                requestsContainer.innerHTML = '<p class="no-properties">You haven&apos;t submitted any &quot;request to buy&quot; forms yet in this demo. Open a property and use the Request to buy button to see how it behaves.</p>';
+                return;
+            }
+
+            requestsContainer.innerHTML = '';
+            requests.slice().reverse().forEach(function (req) {
+                const card = document.createElement('div');
+                card.className = 'agent-card';
+                const title = document.createElement('h4');
+                title.textContent = (req.propertyTitle || 'Property') + ' (Ref: ' + (req.propertyId || '-') + ')';
+
+                const meta = document.createElement('p');
+                meta.style.fontSize = '0.9em';
+                meta.style.color = '#6b7280';
+                const date = req.createdAt ? new Date(req.createdAt) : null;
+                meta.textContent = 'Requested on ' + (date ? date.toLocaleString() : 'unknown time') + ' — Name: ' + (req.name || 'Unknown') + ', Email: ' + (req.email || 'Not provided');
+
+                const notes = document.createElement('p');
+                notes.style.fontSize = '0.9em';
+                notes.style.color = '#374151';
+                notes.textContent = req.message || 'No message supplied.';
+
+                card.appendChild(title);
+                card.appendChild(meta);
+                card.appendChild(notes);
+                requestsContainer.appendChild(card);
+            });
+        }
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function () {
+                localStorage.removeItem('ogUser');
+                localStorage.removeItem('ogIsLoggedIn');
+                if (subtitle) {
+                    subtitle.textContent = 'You have logged out of the demo account. You can continue to browse listings freely.';
+                }
+                renderProfile();
+            });
+        }
+
+        renderProfile();
+        renderRequests();
+    });
+    </script>
+</body>
+</html>
+

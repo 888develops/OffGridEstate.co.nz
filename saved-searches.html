@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Searches &amp; Alerts - Off-Grid Estate NZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <a href="index.html" class="logo">Off-Grid Estate NZ</a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html#property-listings-section">Residential</a></li>
+                        <li><a href="index.html#property-listings-section">Rural</a></li>
+                        <li><a href="index.html#property-listings-section">Commercial</a></li>
+                        <li><a href="index.html#property-listings-section">Business</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="secondary-nav">
+                <ul>
+                    <li><a href="sellers.html">For sellers</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="login.html">Log in / Sign up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="property-details-main">
+        <section class="property-header">
+            <div class="container">
+                <div class="property-title-section">
+                    <h1>Saved Searches &amp; Alerts</h1>
+                    <p class="property-subtitle">Capture the kinds of off-grid properties you&apos;re looking for in this demo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-form-container">
+                    <h3>Create a saved search (demo)</h3>
+                    <form class="contact-form" id="saved-search-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="search-region">Preferred region</label>
+                                <input type="text" id="search-region" placeholder="e.g. Northland, Coromandel, Otago">
+                            </div>
+                            <div class="form-group">
+                                <label for="search-keywords">Keywords</label>
+                                <input type="text" id="search-keywords" placeholder="e.g. solar, river, tiny home">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="search-min-price">Min budget (NZD)</label>
+                                <input type="number" id="search-min-price" min="0" step="10000">
+                            </div>
+                            <div class="form-group">
+                                <label for="search-max-price">Max budget (NZD)</label>
+                                <input type="number" id="search-max-price" min="0" step="10000">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="search-notes">Notes (optional)</label>
+                            <textarea id="search-notes" rows="3" placeholder="Describe your ideal off-grid property in a sentence or two."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Save this search (demo)</button>
+                        <p id="saved-search-feedback" style="margin-top:16px;color:#4b5563;font-size:0.9em;display:none;"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="property-details-section">
+            <div class="container">
+                <div class="property-info">
+                    <div class="property-description">
+                        <h2>Your saved searches</h2>
+                        <p style="margin-bottom:16px;">
+                            In a full product, you&apos;d receive alerts when new properties match these criteria. In this demo
+                            they are stored locally in your browser.
+                        </p>
+                        <div id="saved-search-list">
+                            <!-- Saved searches will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="index.html#property-listings-section">Buy residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Rent residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Buy lifestyle property</a></li>
+                    <li><a href="index.html#property-listings-section">Sell residential property</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Off-Grid Estate NZ</h3>
+                <ul>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="advertise.html">Advertise with us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact us</a></li>
+                    <li><a href="safety.html">Stay safe online</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Download our app</h3>
+                <p>Mobile app experience coming soon.</p>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2023 Off-Grid Estate NZ &mdash; Demo experience only</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('saved-search-form');
+        const feedback = document.getElementById('saved-search-feedback');
+        const list = document.getElementById('saved-search-list');
+
+        function getSavedSearches() {
+            try {
+                const raw = localStorage.getItem('ogSavedSearches');
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function setSavedSearches(searches) {
+            localStorage.setItem('ogSavedSearches', JSON.stringify(searches));
+        }
+
+        function renderSearches() {
+            const searches = getSavedSearches();
+            if (!searches.length) {
+                list.innerHTML = '<p class="no-properties">You haven&apos;t saved any searches yet. Create one above to see it listed here.</p>';
+                return;
+            }
+
+            list.innerHTML = '';
+            searches.forEach(function (search, index) {
+                const container = document.createElement('div');
+                container.className = 'agent-card';
+                container.style.marginBottom = '16px';
+
+                const title = document.createElement('h4');
+                title.textContent = (search.region || 'Any region') + ' — ' + (search.keywords || 'Any keywords');
+
+                const meta = document.createElement('p');
+                meta.style.fontSize = '0.9em';
+                meta.style.color = '#6b7280';
+                const priceText = (search.minPrice || search.maxPrice) ?
+                    ('Budget: ' + (search.minPrice ? '$' + search.minPrice.toLocaleString() : 'Any') +
+                     ' to ' + (search.maxPrice ? '$' + search.maxPrice.toLocaleString() : 'Any')) :
+                    'Budget: Any';
+                meta.textContent = priceText;
+
+                const notes = document.createElement('p');
+                notes.style.fontSize = '0.9em';
+                notes.style.color = '#374151';
+                notes.textContent = search.notes || 'No additional notes.';
+
+                const actions = document.createElement('div');
+                actions.className = 'agent-actions';
+                actions.style.marginTop = '8px';
+
+                const applyBtn = document.createElement('button');
+                applyBtn.className = 'btn-secondary';
+                applyBtn.textContent = 'Apply to current listings';
+                applyBtn.addEventListener('click', function () {
+                    const params = new URLSearchParams();
+                    if (search.region) params.set('region', search.region);
+                    if (search.keywords) params.set('q', search.keywords);
+                    const url = 'index.html?' + params.toString() + '#property-listings-section';
+                    window.location.href = url;
+                });
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'btn-secondary';
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.style.marginLeft = '8px';
+                deleteBtn.addEventListener('click', function () {
+                    const current = getSavedSearches();
+                    current.splice(index, 1);
+                    setSavedSearches(current);
+                    renderSearches();
+                });
+
+                actions.appendChild(applyBtn);
+                actions.appendChild(deleteBtn);
+
+                container.appendChild(title);
+                container.appendChild(meta);
+                container.appendChild(notes);
+                container.appendChild(actions);
+                list.appendChild(container);
+            });
+        }
+
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const region = document.getElementById('search-region').value.trim();
+                const keywords = document.getElementById('search-keywords').value.trim();
+                const minPriceVal = document.getElementById('search-min-price').value;
+                const maxPriceVal = document.getElementById('search-max-price').value;
+                const notes = document.getElementById('search-notes').value.trim();
+
+                const search = {
+                    region: region,
+                    keywords: keywords,
+                    minPrice: minPriceVal ? parseInt(minPriceVal, 10) : null,
+                    maxPrice: maxPriceVal ? parseInt(maxPriceVal, 10) : null,
+                    notes: notes,
+                    createdAt: new Date().toISOString()
+                };
+
+                const searches = getSavedSearches();
+                searches.push(search);
+                setSavedSearches(searches);
+
+                feedback.style.display = 'block';
+                feedback.textContent = 'Search saved in this browser. In a real product you would receive alerts when new properties match.';
+
+                form.reset();
+                renderSearches();
+            });
+        }
+
+        renderSearches();
+    });
+    </script>
+</body>
+</html>
+

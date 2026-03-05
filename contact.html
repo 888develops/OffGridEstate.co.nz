@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Off-Grid Estate NZ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-left">
+                <a href="index.html" class="logo">Off-Grid Estate NZ</a>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html#property-listings-section">Residential</a></li>
+                        <li><a href="index.html#property-listings-section">Rural</a></li>
+                        <li><a href="index.html#property-listings-section">Commercial</a></li>
+                        <li><a href="index.html#property-listings-section">Business</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <nav class="secondary-nav">
+                <ul>
+                    <li><a href="sellers.html">For sellers</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="login.html">Log in / Sign up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="property-details-main">
+        <section class="property-header">
+            <div class="container">
+                <div class="property-title-section">
+                    <h1>Contact Off-Grid Estate NZ</h1>
+                    <p class="property-subtitle">Share feedback on the concept, report an issue or talk about making this real.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-form-container">
+                    <h3>Send us a message</h3>
+                    <form class="contact-form" id="site-contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contact-name">Name (required)</label>
+                                <input type="text" id="contact-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email">Email (required)</label>
+                                <input type="email" id="contact-email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-topic">Topic</label>
+                            <select id="contact-topic">
+                                <option value="">Select a topic</option>
+                                <option value="product-idea">Product idea or feature suggestion</option>
+                                <option value="partnership">Partnership or investment</option>
+                                <option value="bug">Bug or issue with the demo</option>
+                                <option value="other">Something else</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Your message</label>
+                            <textarea id="contact-message" rows="5" placeholder="Tell us how you&apos;d use Off-Grid Estate NZ or what you&apos;d like to see."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send message (demo)</button>
+                        <p id="contact-feedback" style="margin-top:16px;color:#4b5563;font-size:0.9em;display:none;">
+                            Thank you &mdash; your message has been recorded in this demo experience. In a real launch,
+                            this would be delivered to the Off-Grid Estate NZ team.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-section">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="index.html#property-listings-section">Buy residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Rent residential property</a></li>
+                    <li><a href="index.html#property-listings-section">Buy lifestyle property</a></li>
+                    <li><a href="index.html#property-listings-section">Sell residential property</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>About Off-Grid Estate NZ</h3>
+                <ul>
+                    <li><a href="about.html">About us</a></li>
+                    <li><a href="advertise.html">Advertise with us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="contact.html">Contact us</a></li>
+                    <li><a href="safety.html">Stay safe online</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Download our app</h3>
+                <p>Mobile app experience coming soon.</p>
+            </div>
+        </div>
+        <div class="container copyright">
+            <p>&copy; 2023 Off-Grid Estate NZ &mdash; Demo experience only</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('site-contact-form');
+        const feedback = document.getElementById('contact-feedback');
+
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                feedback.style.display = 'block';
+                form.reset();
+                window.scrollTo({ top: feedback.offsetTop - 120, behavior: 'smooth' });
+            });
+        }
+    });
+    </script>
+</body>
+</html>
+
