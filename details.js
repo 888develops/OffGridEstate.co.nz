@@ -9,12 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const propertyFeaturesList = document.getElementById('property-features');
     const propertyGallery = document.getElementById('property-gallery');
     const thumbnailGallery = document.getElementById('thumbnail-gallery');
-    const detailMapElement = document.getElementById('detail-map');
 
     const mockProperties = [
         {
             id: "L001",
-            title: "Aoraki Alpine Station &mdash; 2,500 acre high-country holding",
+            title: "Aoraki Alpine Station — 2,500 acre high-country holding",
             location: "Aoraki / Mount Cook, Canterbury",
             price: 2250000,
             landSize: 2500,
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         },
         {
             id: "L002",
-            title: "Te Manawa Tussock Run &mdash; 1,800 acre backcountry station",
+            title: "Te Manawa Tussock Run — 1,800 acre backcountry station",
             location: "Maniototo, Central Otago",
             price: 1800000,
             landSize: 1800,
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         },
         {
             id: "H001",
-            title: "Lupin Ridge Stone Cottage &mdash; lakeside off-grid retreat",
+            title: "Lupin Ridge Stone Cottage — lakeside off-grid retreat",
             location: "Lake Tekapo, Canterbury",
             price: 1150000,
             landSize: 15,
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         },
         {
             id: "H002",
-            title: "Queenstown Homestead Outlook &mdash; alpine-edge family base",
+            title: "Queenstown Homestead Outlook — alpine-edge family base",
             location: "Queenstown, Otago",
             price: 1650000,
             landSize: 5,
@@ -130,17 +129,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
             const mainImage = document.getElementById('main-image');
             mainImage.src = 'https://via.placeholder.com/1200x600/ccc/white?text=No+Images+Available';
-        }
-
-        if (property.latitude && property.longitude && typeof L !== 'undefined') {
-            const detailMap = L.map(detailMapElement).setView([property.latitude, property.longitude], 13);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(detailMap);
-
-            L.marker([property.latitude, property.longitude]).addTo(detailMap)
-                .bindPopup(`<b>${property.title}</b><br>${property.location}`).openPopup();
         }
 
         setupDetailActions(property);

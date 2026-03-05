@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const testProperties = [
         {
             id: "L001",
-            title: "Aoraki Alpine Station &mdash; 2,500 acre high-country holding",
+            title: "Aoraki Alpine Station — 2,500 acre high-country holding",
             location: "Aoraki / Mount Cook, Canterbury",
             price: 2250000,
             landSize: 2500,
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: "L002",
-            title: "Te Manawa Tussock Run &mdash; 1,800 acre backcountry station",
+            title: "Te Manawa Tussock Run — 1,800 acre backcountry station",
             location: "Maniototo, Central Otago",
             price: 1800000,
             landSize: 1800,
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: "H001",
-            title: "Lupin Ridge Stone Cottage &mdash; lakeside off-grid retreat",
+            title: "Lupin Ridge Stone Cottage — lakeside off-grid retreat",
             location: "Lake Tekapo, Canterbury",
             price: 1150000,
             landSize: 15,
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             id: "H002",
-            title: "Queenstown Homestead Outlook &mdash; alpine-edge family base",
+            title: "Queenstown Homestead Outlook — alpine-edge family base",
             location: "Queenstown, Otago",
             price: 1650000,
             landSize: 5,
