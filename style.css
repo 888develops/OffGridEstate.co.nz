@@ -2930,3 +2930,246 @@ footer .container {
 .property-card-features {
     margin-bottom: 14px;
 }
+
+/* Global logo fit improvements */
+.logo {
+    font-size: clamp(1.4rem, 2.2vw, 2.4rem);
+    margin-right: 24px;
+    white-space: nowrap;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #fff;
+    border-radius: 8px;
+    width: 42px;
+    height: 38px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background: #2d5016;
+    border-radius: 2px;
+}
+
+@media (max-width: 900px) {
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+    }
+
+    header .container {
+        height: auto;
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        overflow: visible;
+    }
+
+    .header-left {
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        margin-right: 0;
+        max-width: calc(100% - 56px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+        flex-shrink: 0;
+    }
+
+    .main-nav,
+    .secondary-nav {
+        display: none;
+        width: 100%;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 10px;
+        padding: 10px 12px;
+    }
+
+    body.menu-open .main-nav,
+    body.menu-open .secondary-nav {
+        display: block;
+    }
+
+    .main-nav ul,
+    .secondary-nav ul {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .main-nav li,
+    .secondary-nav li {
+        display: block;
+        margin: 0;
+    }
+
+    .main-nav a,
+    .secondary-nav a {
+        display: block;
+        padding: 10px 8px;
+        font-size: 0.96rem;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 84px 0 54px;
+    }
+
+    .hero h2 {
+        font-size: clamp(1.9rem, 7vw, 2.6rem);
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .hero .hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-nav ul {
+        gap: 10px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+    }
+
+    .hero-nav a {
+        font-size: 0.95rem;
+        padding: 8px 14px;
+    }
+
+    .search-bar.hero-search {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 14px;
+        padding: 8px;
+    }
+
+    .search-bar.hero-search input,
+    .search-bar.hero-search button,
+    .search-bar.hero-search .filter-button {
+        width: 100%;
+        margin: 0 0 8px 0;
+        border-radius: 10px;
+    }
+
+    .search-bar.hero-search button:last-child {
+        margin-bottom: 0;
+    }
+
+    .map-search-section,
+    .featured-properties,
+    .property-listings-section,
+    .user-account-section {
+        padding: 48px 0;
+    }
+
+    .featured-properties h2,
+    .listings-header h2,
+    .map-search-header h2 {
+        font-size: 1.9rem;
+    }
+
+    .property-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .property-card-image {
+        height: 220px;
+    }
+
+    .property-card-content {
+        padding: 16px;
+    }
+
+    .account-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .location-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .property-header .container {
+        padding: 0 14px;
+    }
+
+    .property-actions {
+        width: 100%;
+    }
+
+    .action-btn {
+        flex: 1 1 calc(50% - 8px);
+        justify-content: center;
+        font-size: 0.86rem;
+        padding: 10px;
+    }
+
+    .gallery-container,
+    .property-details-main .container,
+    .contact-section .container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .property-title-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .property-price {
+        font-size: 1.9rem;
+    }
+
+    .property-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .property-details-section .agent-card,
+    .property-details-section .property-features-card,
+    .contact-form-container {
+        max-width: 100%;
+    }
+
+    .contact-form {
+        padding: 16px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    footer .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+        text-align: left;
+    }
+
+    .footer-section {
+        margin: 8px 0;
+        min-width: 0;
+    }
+}
